@@ -1,3 +1,15 @@
+import huffman_coding as hc
+import codecs
+
+def create_dictionary():
+    with codecs.open('dictionary', 'r', 'utf-8') as f:
+        lines = f.readlines()
+    message = ''
+    for line in lines:
+        message += str(line)
+    return hc.encoding(message)
+
+
 def encode_message(message: str, dictionary):
     encoded_message = []
     for word in message:
