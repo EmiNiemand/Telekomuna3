@@ -1,5 +1,7 @@
 import encode_decode_message as edm
 import codecs
+import send_receive as sr
+
 
 def main():
     with codecs.open('message', 'r', 'utf-8') as f:
@@ -9,9 +11,7 @@ def main():
         message += str(line)
     dictionary = edm.create_dictionary()
     encoded_message = edm.encode_message(message, dictionary)
-    print(encoded_message)
-    decoded_message = edm.decode_message(encoded_message, dictionary)
-    print(decoded_message)
+    sr.send(encoded_message)
 
 
 if __name__ == '__main__':

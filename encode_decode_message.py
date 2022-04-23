@@ -13,14 +13,14 @@ def create_dictionary():
 def encode_message(message: str, dictionary):
     encoded_message = []
     for word in message:
-        encoded_message.append(dictionary[word])
+        encoded_message.append(bytes(dictionary[word], 'utf-8'))
     return encoded_message
 
 
-def decode_message(encoded_message: str, dictionary):
+def decode_message(encoded_message: [], dictionary):
     message = ''
     for word in encoded_message:
-        message += find_value_in_dictionary(word, dictionary)
+        message += find_value_in_dictionary(word.decode('utf-8'), dictionary)
     return message
 
 
