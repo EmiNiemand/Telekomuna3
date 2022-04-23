@@ -1,1 +1,2 @@
 Wiadomość do zakodowania mam nadzieje, że monolog skryby w dictionary będzie wystarczający, aby pomyślnie zakodować tę wiadomość.
+Jak działają entery w sumie nie wiem.
