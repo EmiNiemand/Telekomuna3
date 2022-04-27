@@ -1,9 +1,6 @@
 import huffman_coding as hc
-import codecs
 
-def create_dictionary():
-    with codecs.open('dictionary', 'rb', 'utf-8') as f:
-        message = f.read()
+def create_dictionary(message: str):
     return hc.encoding(message)
 
 
