@@ -4,12 +4,10 @@ import send_receive as sr
 
 
 def main():
-    with codecs.open('message', 'r', 'utf-8') as f:
-        lines = f.readlines()
-    message = ''
-    for line in lines:
-        message += str(line)
+    with codecs.open('message', 'rb', 'utf-8') as f:
+        message = f.read()
     dictionary = edm.create_dictionary()
+    print(dictionary)
     encoded_message = edm.encode_message(message, dictionary)
     sr.send(encoded_message)
 

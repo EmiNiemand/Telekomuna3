@@ -5,7 +5,7 @@ import codecs
 def main():
     dictionary = edm.create_dictionary()
     encoded_message = sr.receive()
-    decoded_message = edm.decode_message(encoded_message, dictionary)
+    decoded_message = edm.decode_message(encoded_message.decode('utf-8'), dictionary)
     f = codecs.open('received_message.txt', 'w+', 'utf-8')
     f.write(decoded_message)
     f.close()

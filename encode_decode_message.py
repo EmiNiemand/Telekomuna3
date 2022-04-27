@@ -2,25 +2,28 @@ import huffman_coding as hc
 import codecs
 
 def create_dictionary():
-    with codecs.open('dictionary', 'r', 'utf-8') as f:
-        lines = f.readlines()
-    message = ''
-    for line in lines:
-        message += str(line)
+    with codecs.open('dictionary', 'rb', 'utf-8') as f:
+        message = f.read()
     return hc.encoding(message)
 
 
-def encode_message(message: str, dictionary):
-    encoded_message = []
+def encode_message(message, dictionary):
+    encoded_message = ''
     for word in message:
-        encoded_message.append(bytes(dictionary[word], 'utf-8'))
-    return encoded_message
+        encoded_message += dictionary[word]
+    return bytes(encoded_message, 'utf-8')
 
 
-def decode_message(encoded_message: [], dictionary):
+def decode_message(encoded_message: str, dictionary):
     message = ''
-    for word in encoded_message:
-        message += find_value_in_dictionary(word.decode('utf-8'), dictionary)
+    word = ''
+    for i in range(len(encoded_message)):
+        word += encoded_message[i]
+        try:
+            message += find_value_in_dictionary(word, dictionary)
+            word = ''
+        except Exception:
+            pass
     return message
 
 
