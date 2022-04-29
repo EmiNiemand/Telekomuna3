@@ -1,6 +1,6 @@
 from collections import Counter
 
-
+#klasa pojedynczego węzła drzewa
 class NodeTree(object):
     def __init__(self, left=None, right=None):
         self.left = left
@@ -13,7 +13,7 @@ class NodeTree(object):
         return self.left, self.right
 
 
-# Function to find Huffman Code
+#funkcja znajdująca odpowiednie kodowania w drzewie i zapisująca je do słownika
 def huffman_code_tree(node, bin_string=''):
     if type(node) is str:
         return {node: bin_string}
@@ -24,7 +24,7 @@ def huffman_code_tree(node, bin_string=''):
     return dictionary
 
 
-# Function to make tree
+#funkcja tworząca drzewo binarne Huffmana
 def make_tree(nodes):
     while len(nodes) > 1:
         (key1, c1) = nodes[-1]
@@ -35,9 +35,10 @@ def make_tree(nodes):
         nodes = sorted(nodes, key=lambda x: x[1], reverse=True)
     return nodes[0][0]
 
-
+#wyznaczanie słownika opartego na kodowaniu Huffmana
 def encoding(message: str):
     freq = dict(Counter(message))
+    #sortowanie znaków od najczęściej występującego do najrzadziej występującego
     freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
     node = make_tree(freq)
     return huffman_code_tree(node)

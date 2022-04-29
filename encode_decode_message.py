@@ -1,16 +1,18 @@
 import huffman_coding as hc
 
+#zwraca słownik stworzony na bazie wiadomości przy użyciu drzewa Huffmana
 def create_dictionary(message: str):
     return hc.encoding(message)
 
 
+#kodowanie wiadomości, zmiana znaku wiadomości na odpowiednik w drzewie
 def encode_message(message, dictionary):
     encoded_message = ''
     for word in message:
         encoded_message += dictionary[word]
     return bytes(encoded_message, 'utf-8')
 
-
+#dekodowanie wiadomości, znajdowanie odpowiednich znaków w słowniku
 def decode_message(encoded_message: str, dictionary):
     message = ''
     word = ''
