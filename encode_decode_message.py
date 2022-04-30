@@ -26,6 +26,7 @@ def decode_message(encoded_message: str, dictionary):
     return message
 
 
+#odnajdowanie znaków na podstawie ciągu 0 i 1
 def find_value_in_dictionary(code: str, dictionary):
     for word, dic_code in dictionary.items():
         if dic_code == code:

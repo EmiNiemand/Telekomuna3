@@ -1,15 +1,15 @@
 import socket
 import time
 
-
-def send(message, dictionary, ip: str):
+#funkcja odpowiedzialna za wysłanie wiadomości
+def send(message, dictionary, ip: str, port: int):
     for i in range(10):
         time.sleep(1)
         try:
             # tworzenie socketu klienta
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             # łączenie się z serverem
-            client_socket.connect((ip, 2137))
+            client_socket.connect((ip, port))
             dictionary_length = len(dictionary)
             #przesłanie długości słownika i samego słownika
             client_socket.send(dictionary_length.to_bytes(2, "little"))
@@ -22,12 +22,14 @@ def send(message, dictionary, ip: str):
         except Exception:
             pass
 
-def receive(ip: str):
+
+#funckja odpowiedzialna za odebranie wiadomości
+def receive(ip: str, port: int):
     # Tworzenie socketu TCP
     # operującego na adresie IPv4
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Powiązanie adresu ip z socketem i rozpoczęcie nasłuchiwania
-    server_socket.bind(("127.0.0.1", 2137))
+    server_socket.bind((ip, port))
     server_socket.listen()
     #zaakceptowanie połączenia od klienta
     (client_connected, client_address) = server_socket.accept()
