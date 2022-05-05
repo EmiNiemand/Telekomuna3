@@ -1,5 +1,6 @@
 import socket
 import time
+from bitstring import BitArray
 
 #funkcja odpowiedzialna za wysłanie wiadomości
 def send(message, dictionary, ip: str, port: int):
@@ -17,7 +18,7 @@ def send(message, dictionary, ip: str, port: int):
             data_length = len(message)
             # przesłanie długości wiadomości i samej wiadomości
             client_socket.send(data_length.to_bytes(2, "little"))
-            client_socket.sendall(message)
+            client_socket.sendall(int(message, 2).to_bytes((len(message) + 7) // 8, 'little'))
             break
         except Exception:
             pass
@@ -39,6 +40,7 @@ def receive(ip: str, port: int):
     # odebranie długości wiadomości i samej wiadomości
     data_length = client_connected.recv(2)
     message = client_connected.recv(int.from_bytes(data_length, "little"))
-
+    c = BitArray(hex=message)
+    message = c.bin[2:]
     return message, dictionary
 
