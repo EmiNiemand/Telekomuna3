@@ -1,3 +1,3 @@
-Testowa Bartkowa wiadomość.
-Taka wiadomość to jest bardzo fajna.
-Lubię takie wiadomości co je można wysyłać.
+Testowa wiadomość
+dla testu programu
+żeby pokazać że działa

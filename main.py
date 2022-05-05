@@ -14,9 +14,19 @@ def main():
                     message = f.read()
                 dictionary = edm.create_dictionary(message)
                 encoded_message = edm.encode_message(message, dictionary)
+                encoded_message = encoded_message.decode('ascii')
+                new_message = bytes()
+                for j in range(0, int(len(encoded_message)), 8):
+                    byte = ''
+                    for k in range(8):
+                        if k+1+j > len(encoded_message):
+                            break
+                        byte += encoded_message[j + k]
+                    helper = int(byte, 2).to_bytes(1, byteorder='big')
+                    new_message += helper
                 ip = str(input("Write server IP(IPv4): "))
                 port = int(input("Write port number(int > 1000): "))
-                sr.send(encoded_message, str(dictionary).encode('utf-8'), ip, port)
+                sr.send(new_message, str(dictionary).encode('utf-8'), ip, port)
                 print("Message sent successfully")
             elif choice == 2:
                 ip = str(input("Write server IP(IPv4): "))
@@ -25,11 +35,7 @@ def main():
                 dictionary = dictionary.decode('utf-8')
                 dictionary = dictionary.replace("'", "\"")
                 dictionary = json.loads(dictionary)
-                print(encoded_message)
-                # f = codecs.open('received_encoded_message.txt', 'w+', 'utf-8')
-                # f.write(encoded_message)
-                # f.close()
-                decoded_message = edm.decode_message(encoded_message.decode('utf-8'), dictionary)
+                decoded_message = edm.decode_message(encoded_message, dictionary)
                 f = codecs.open('received_message.txt', 'w+', 'utf-8')
                 f.write(decoded_message)
                 f.close()
