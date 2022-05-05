@@ -6,7 +6,7 @@ import json
 
 def main():
     while True:
-        #try:
+        try:
             choice = int(input("'1' - send message, '2' - receive message, '3' - exit program: "))
 
             if choice == 1:
@@ -38,8 +38,8 @@ def main():
                 break
             else:
                 raise Exception
-        # except Exception:
-        #     print("Incorrect number")
+        except Exception:
+            print("Incorrect number")
 
 
 if __name__ == '__main__':
